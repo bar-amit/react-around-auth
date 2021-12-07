@@ -1,0 +1,12 @@
+.form__field {
+  width: 100%;
+  position: relative;
+}
+
+.form__field:first-of-type {
+  margin-bottom: 29px;
+}
+
+.form__field:last-of-type {
+  margin-bottom: 46px;
+}

@@ -1,0 +1,16 @@
+@media screen and (max-width: 558px) {
+  .popup__close-button_shrink {
+    top: -60px;
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 508px) {
+  .popup__close-button_shrink {
+    width: 26px;
+    height: 26px;
+    background-image: url(../../../../images/popup__close-button_small.svg);
+    top: -44px;
+    right: 0;
+  }
+}

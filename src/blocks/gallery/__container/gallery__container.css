@@ -1,0 +1,31 @@
+.gallery__container {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, calc((100% - 2 * 17px) / 3));
+  grid-auto-rows: calc((880px - 2 * 17px) * 1.28 / 3);  /* card's aspect ratio should be 1.28 */
+  column-gap: 17px;
+  row-gap: 20px;
+}
+
+@media screen and (max-width: 1080px) {
+  .gallery__container {
+    grid-template-columns: repeat(2, calc((100% - 17px) / 2));
+    grid-auto-rows: calc((80vw - 17px) * 1.28 / 2);
+  }
+}
+
+@media screen and (max-width: 547px) {
+  .gallery__container {
+    grid-template-columns: 100%;
+    grid-auto-rows: calc(80vw * 1.28);
+  }
+}
+
+@media screen and (max-width: 467px) {
+  .gallery__container {
+    grid-auto-rows: calc((100vw - 38px) * 1.28);
+  }
+}

@@ -1,0 +1,28 @@
+.page {
+  min-height: calc(100% - 45px - 60px);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  margin: 0;
+  padding-top: 45px;
+  padding-bottom: 60px;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    min-height: calc(100% - 45px - 37px);
+    padding-top: 37px;
+    padding-bottom: 45px;
+  }
+}
+
+@media screen and (max-width: 476px) {
+  .page {
+    min-height: calc(100% - 28px - 36px);
+    padding-top: 28px;
+    padding-bottom: 36px;
+  }
+}

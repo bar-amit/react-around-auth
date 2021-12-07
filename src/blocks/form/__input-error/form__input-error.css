@@ -1,0 +1,13 @@
+.form__input-error {
+  width: 100%;
+  color: red;
+  font-size: 12px;
+  line-height: 1.21;
+  visibility: hidden;
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
