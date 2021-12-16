@@ -1,11 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function UserForm({
-  handleFormSubmit,
-  formTitle,
-  formName,
-  linkText,
-}) {
+function UserForm({ handleFormSubmit, formTitle, formName, linkText }) {
   const [currentButtonText, setCurrentButtonText] = useState(formTitle);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +20,7 @@ export default function UserForm({
   }
 
   return (
-    <main className="user-form">
+    <main className="main user-form">
       <h2 className="user-form__title">{formTitle}</h2>
       <form
         className={`form form_name_${formName}`}
@@ -64,8 +60,15 @@ export default function UserForm({
         <button className="form__save-button" type="submit">
           {currentButtonText}
         </button>
-        <p className="user-form__link">{linkText}</p>
+        <Link
+          to={formName === "signin" ? "/register" : "/login"}
+          className="user-form__link"
+        >
+          {linkText}
+        </Link>
       </form>
     </main>
   );
 }
+
+export default UserForm;
