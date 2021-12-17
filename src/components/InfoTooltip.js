@@ -32,10 +32,11 @@ function InfoTooltip({ hasSucceed, isOpen, onClose }) {
           onClick={onClose}
         />
         <img
+          className="popup__tooltip-icon"
           src={hasSucceed ? successIcon : failIcon}
           alt={hasSucceed ? "Operation succeed" : "Operation failed"}
         />
-        <h2 className="popup__title">
+        <h2 className="popup__title popup__title_centered">
           {hasSucceed ? text.success : text.fail}
         </h2>
       </div>
