@@ -20,53 +20,65 @@ function UserForm({ handleFormSubmit, formTitle, formName, linkText }) {
   }
 
   return (
-    <main className="main user-form">
-      <h2 className="user-form__title">{formTitle}</h2>
-      <form
-        className={`form form_name_${formName}`}
-        name={formName}
-        onSubmit={handleSubmit}
-      >
-        <label className="form__field">
-          <input
-            id="input_email"
-            className="form__input form__input_type_email"
-            value={email}
-            type="email"
-            name="email"
-            placeholder="Email"
-            minLength="2"
-            maxLength="40"
-            required
-            onChange={handleInputChange}
-          />
-          <span id="input_password-error" className="form__input-error"></span>
-        </label>
-        <label className="form__field">
-          <input
-            id="input_password"
-            className="form__input form__input_type_password"
-            value={password}
-            type="text"
-            name="password"
-            placeholder="Password"
-            minLength="2"
-            maxLength="200"
-            required
-            onChange={handleInputChange}
-          />
-          <span id="input_password-error" className="form__input-error"></span>
-        </label>
-        <button className="form__save-button" type="submit">
-          {currentButtonText}
-        </button>
-        <Link
-          to={formName === "signin" ? "/register" : "/login"}
-          className="user-form__link"
+    <main className="main">
+      <section className="user-form">
+        <h2 className="user-form__title">{formTitle}</h2>
+        <form
+          className={`form form_name_${formName} user-form__form`}
+          name={formName}
+          onSubmit={handleSubmit}
         >
-          {linkText}
-        </Link>
-      </form>
+          <div className="user-form__section">
+            <label className="form__field">
+              <input
+                id="input_email"
+                className="user-form__input"
+                value={email}
+                type="email"
+                name="email"
+                placeholder="Email"
+                minLength="2"
+                maxLength="40"
+                required
+                onChange={handleInputChange}
+              />
+              <span
+                id="input_password-error"
+                className="form__input-error"
+              ></span>
+            </label>
+            <label className="form__field">
+              <input
+                id="input_password"
+                className="user-form__input"
+                value={password}
+                type="text"
+                name="password"
+                placeholder="Password"
+                minLength="2"
+                maxLength="200"
+                required
+                onChange={handleInputChange}
+              />
+              <span
+                id="input_password-error"
+                className="form__input-error"
+              ></span>
+            </label>
+          </div>
+          <div className="user-form__section">
+            <button className="user-form__button" type="submit">
+              {currentButtonText}
+            </button>
+            <Link
+              to={formName === "signin" ? "/register" : "/login"}
+              className="user-form__link"
+            >
+              {linkText}
+            </Link>
+          </div>
+        </form>
+      </section>
     </main>
   );
 }

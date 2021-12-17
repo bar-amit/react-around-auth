@@ -17,6 +17,15 @@
 /* main */
 @import url(./blocks/main/main.css);
 
+/* user-form */
+@import url(./blocks/user-form/user-form.css);
+@import url(./blocks/user-form/__form/user-form__form.css);
+@import url(./blocks/user-form/__section/user-form__section.css);
+@import url(./blocks/user-form/__link/user-form__link.css);
+@import url(./blocks/user-form/__title/user-form__title.css);
+@import url(./blocks/user-form/__button/userr-form__button.css);
+@import url(./blocks/user-form/__input/user-form__input.css);
+
 /* profile */
 @import url(./blocks/profile/profile.css);
 @import url(./blocks/profile/__avatar/profile__avatar.css);

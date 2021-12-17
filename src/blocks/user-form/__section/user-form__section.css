@@ -1,0 +1,4 @@
+.user-form__section {
+  display: flex;
+  flex-direction: column;
+}

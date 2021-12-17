@@ -1,0 +1,18 @@
+.user-form__input {
+  height: 27px;
+  width: 100%;
+  color: white;
+  border: none;
+  border-bottom: 2px solid;
+  border-color: #cccccc;
+  outline: none;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.user-form__input::placeholder {
+  color: #cccccc;
+  font-size: 14px;
+}
