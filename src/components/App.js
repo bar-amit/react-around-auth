@@ -55,7 +55,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setSelectedCard({});
-    setisInfoTooltipOpen({ isOpen: false, hasSucceed: false });
+    setisInfoTooltipOpen({ ...isInfoTooltipOpen, isOpen: false });
   };
 
   React.useEffect(() => {
@@ -191,13 +191,9 @@ function App() {
       .signup({ email, password })
       .then(() => {
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: true });
-        return setCurrentUser({
-          ...currentUser,
-          signedIn: auth.isSignedIn,
-          email: auth.user.email,
-        });
+        console.log({ email, password });
+        login({ email, password });
       })
-      .then(() => navigate("/", { replace: true }))
       .catch(() => {
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: false });
         console.log("faild to login");

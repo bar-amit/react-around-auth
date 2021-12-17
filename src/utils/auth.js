@@ -46,12 +46,11 @@ function removeToken() {
 
 async function signup({ password, email }) {
   try {
-    const { _id: id } = await fetch(`${authBaseUrl}/signup`, {
+    return await fetch(`${authBaseUrl}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, email }),
     });
-    return signin({ password, email });
   } catch (err) {
     console.log(err);
   }
