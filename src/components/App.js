@@ -21,7 +21,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
     signedIn: null,
-    email: auth.user.email,
+    email: "",
     name: "",
     about: "",
     _id: "",
@@ -122,7 +122,7 @@ function App() {
     const id = confirmPopupState.cardId;
     return api
       .deleteCard(id)
-      .then(setCards(cards.filter((card) => card._id !== id)))
+      .then(() => setCards(cards.filter((card) => card._id !== id)))
       .then(() => setConfirmPopupState({ isOpen: false, cardId: "" }))
       .catch((e) => console.log(e));
   }
@@ -137,7 +137,14 @@ function App() {
       ? api.removeLike.bind(api)
       : api.addLike.bind(api);
     updateLikes(card._id)
-      .then(updateCards)
+      .then((updatedCard) => {
+        const index = cards.findIndex(({ _id: id }) => id === updatedCard._id);
+        setCards([
+          ...cards.slice(0, index),
+          updatedCard,
+          ...cards.slice(index + 1),
+        ]);
+      })
       .catch((e) => console.log(e));
   };
   const handleCardDelete = (card) => {
@@ -172,22 +179,33 @@ function App() {
     Auth
   */
 
+  function saveToken({ token }) {
+    localStorage.setItem("jwt", token);
+  }
+
+  function removeToken() {
+    localStorage.removeItem("jwt");
+  }
+
   function login({ email, password }) {
-    return auth
+    auth
       .signin({ email, password })
-      .then(() => {
+      .then((data) => {
+        saveToken(data);
         setCurrentUser({
           ...currentUser,
-          signedIn: auth.isSignedIn,
-          email: auth.user.email,
+          signedIn: true,
+          email: email,
         });
       })
       .then(() => navigate("/", { replace: true }))
-      .catch(() => setisInfoTooltipOpen({ isOpen: true, hasSucceed: false }));
+      .catch(() => {
+        setisInfoTooltipOpen({ isOpen: true, hasSucceed: false });
+      });
   }
 
   function register({ email, password }) {
-    return auth
+    auth
       .signup({ email, password })
       .then((data) => {
         if (data.error) throw new Error({ message: "Failed to register" });
@@ -201,23 +219,32 @@ function App() {
   }
 
   function logout() {
-    auth.logout();
+    removeToken();
     setCurrentUser({ ...currentUser, signedIn: false, email: null });
   }
 
+  async function checkLocalStorageToken() {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      try {
+        const {
+          data: { email },
+        } = await auth.checkToken({ token });
+        setCurrentUser({
+          ...currentUser,
+          signedIn: true,
+          email: email,
+        });
+        navigate("/", { replace: true });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
   React.useEffect(() => {
-    if (currentUser.signedIn === null)
-      auth.initialize().then(() => {
-        if (auth.isSignedIn) {
-          setCurrentUser({
-            ...currentUser,
-            signedIn: true,
-            email: auth.user.email,
-          });
-          navigate("/", { replace: true });
-        }
-      });
-  }, [auth.isSignedIn]);
+    if (currentUser.signedIn === null) checkLocalStorageToken();
+  }, []);
 
   return (
     <>
