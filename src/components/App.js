@@ -183,20 +183,20 @@ function App() {
         });
       })
       .then(() => navigate("/", { replace: true }))
-      .catch((err) => console.log(err));
+      .catch(() => setisInfoTooltipOpen({ isOpen: true, hasSucceed: false }));
   }
 
   function register({ email, password }) {
     return auth
       .signup({ email, password })
-      .then(() => {
+      .then((data) => {
+        if (data.error) throw new Error({ message: "Failed to register" });
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: true });
         console.log({ email, password });
         login({ email, password });
       })
       .catch(() => {
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: false });
-        console.log("faild to login");
       });
   }
 

@@ -46,11 +46,12 @@ function removeToken() {
 
 async function signup({ password, email }) {
   try {
-    return await fetch(`${authBaseUrl}/signup`, {
+    const res = await fetch(`${authBaseUrl}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, email }),
     });
+    return await res.json();
   } catch (err) {
     console.log(err);
   }
@@ -72,7 +73,7 @@ async function signin({ email, password }) {
     const err = new Error("failed login");
     throw err;
   } catch (err) {
-    console.log(err);
+    return Promise.reject("failed login");
   }
 }
 
