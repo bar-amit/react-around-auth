@@ -63,15 +63,11 @@ More information here: [https://facebook.github.io/create-react-app/docs/deploym
 
 ### Last Update
 
-- All the old features are back!!!
-- Form submition
-- Give likes
-- Add/Delete card
-- Edit profile
-- Prettier code formating
+- Login and registration
+- Routes
 
 ### TODO
 
 - Form validation
 - Backend.
-- Login.
+- Mobile
