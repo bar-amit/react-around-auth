@@ -47,7 +47,7 @@ class Api {
    * @param {string} [id='me'] - Optional (default is own user)
    * @returns {Promise<userData>} - User data.
    */
-  getUserInfo(id = 'me') {
+  getUserInfo(id = "me") {
     return fetch(`${this._host}/users/${id}`, { headers: this._headers })
       .then(this._handleResponse)
       .then((data) => {
@@ -63,10 +63,10 @@ class Api {
    */
   updateUserAvatar(avatar) {
     return fetch(`${this._host}/users/me/avatar`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
         ...this._headers,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         avatar,
@@ -81,10 +81,10 @@ class Api {
    */
   updateUser({ name, about }) {
     return fetch(`${this._host}/users/me`, {
-      method: 'PATCH',
+      method: "PATCH",
       headers: {
         ...this._headers,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -99,7 +99,7 @@ class Api {
    */
   getCards() {
     return fetch(`${this._host}/cards`, { headers: this._headers }).then(
-      this._handleResponse,
+      this._handleResponse
     );
   }
 
@@ -110,10 +110,10 @@ class Api {
    */
   addCard({ name, link }) {
     return fetch(`${this._host}/cards`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         ...this._headers,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
@@ -129,7 +129,7 @@ class Api {
    */
   deleteCard(id) {
     return fetch(`${this._host}/cards/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -141,7 +141,7 @@ class Api {
    */
   addLike(id) {
     return fetch(`${this._host}/cards/likes/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: this._headers,
     }).then(this._handleResponse);
   }
@@ -153,15 +153,16 @@ class Api {
    */
   removeLike(id) {
     return fetch(`${this._host}/cards/likes/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
   }
 }
 
-const api = new Api({
-  host: 'https://around.nomoreparties.co/v1/group-12',
-  authorization: '9dcb4203-ec5d-4132-a4af-e260b13cb4d2',
-});
+const getApi = (token) =>
+  new Api({
+    host: "http://localhost:3001",
+    authorization: `Bearer ${token}`,
+  });
 
-export default api;
+export default getApi;

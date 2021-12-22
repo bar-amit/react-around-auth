@@ -14,7 +14,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
 
 import { auth } from "../utils/auth";
-import api from "../utils/api";
+import getApi from "../utils/api";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -154,6 +154,9 @@ function App() {
   /*
     Api calls
   */
+
+  let api = getApi(localStorage.getItem("jwt"));
+
   function updateCards() {
     return api
       .getCards()
@@ -164,16 +167,12 @@ function App() {
   function updateUserInfo() {
     return api
       .getUserInfo()
-      .then((data) => setCurrentUser({ ...currentUser, ...data }))
-      .catch((e) => console.log(e));
+      .then((data) => {
+        setCurrentUser({ ...currentUser, signedIn: true, ...data });
+        return true;
+      })
+      .catch((e) => Promise.reject("Token is not valid"));
   }
-
-  React.useEffect(() => {
-    if (currentUser.signedIn)
-      Promise.all([updateCards(), updateUserInfo()]).catch((e) =>
-        console.log(e)
-      );
-  }, [currentUser.signedIn]);
 
   /*
     Auth
@@ -192,13 +191,10 @@ function App() {
       .signin({ email, password })
       .then((data) => {
         saveToken(data);
-        setCurrentUser({
-          ...currentUser,
-          signedIn: true,
-          email: email,
-        });
+        api = getApi(localStorage.getItem("jwt"));
+        setCurrentUser({ ...currentUser, signedIn: true });
+        navigate("/", { replace: true });
       })
-      .then(() => navigate("/", { replace: true }))
       .catch(() => {
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: false });
       });
@@ -210,7 +206,6 @@ function App() {
       .then((data) => {
         if (data.error) throw new Error({ message: "Failed to register" });
         setisInfoTooltipOpen({ isOpen: true, hasSucceed: true });
-        console.log({ email, password });
         login({ email, password });
       })
       .catch(() => {
@@ -224,27 +219,24 @@ function App() {
   }
 
   async function checkLocalStorageToken() {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      try {
-        const {
-          data: { email },
-        } = await auth.checkToken({ token });
-        setCurrentUser({
-          ...currentUser,
-          signedIn: true,
-          email: email,
-        });
-        navigate("/", { replace: true });
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      const isValid = await updateUserInfo();
+      if (isValid) navigate("/", { replace: true });
+      else setCurrentUser({ ...currentUser, signedIn: false });
+    } catch (err) {
+      setCurrentUser({ ...currentUser, signedIn: false });
+      console.log(err);
     }
   }
 
   React.useEffect(() => {
     if (currentUser.signedIn === null) checkLocalStorageToken();
-  }, []);
+    if (currentUser.signedIn) {
+      Promise.all([updateCards(), updateUserInfo()]).catch((e) =>
+        console.log(e)
+      );
+    }
+  }, [currentUser.signedIn]);
 
   return (
     <>

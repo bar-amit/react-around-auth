@@ -1,4 +1,4 @@
-const { authBaseUrl = "https://register.nomoreparties.co" } = process.env;
+const { authBaseUrl = "http://localhost:3001" } = process.env;
 
 function handleResponse(res) {
   if (res.ok) return res.json();
@@ -9,6 +9,7 @@ function checkToken({ token }) {
   return fetch(`${authBaseUrl}/users/me`, {
     method: "GET",
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
@@ -18,7 +19,10 @@ function checkToken({ token }) {
 async function signup({ password, email }) {
   return fetch(`${authBaseUrl}/signup`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ password, email }),
   }).then(handleResponse);
 }
@@ -31,7 +35,10 @@ async function signup({ password, email }) {
 async function signin({ email, password }) {
   return fetch(`${authBaseUrl}/signin`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ password, email }),
   }).then(handleResponse);
 }

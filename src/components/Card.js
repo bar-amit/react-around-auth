@@ -34,8 +34,8 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 function Card({ data, onCardClick, onCardLike, onCardDelete }) {
   const { _id: id } = useContext(CurrentUserContext);
 
-  const isOwn = id === data.owner._id;
-  const isLiked = data.likes.some((like) => like._id === id);
+  const isOwn = id === data.owner;
+  const isLiked = data.likes?.some((like) => like === id);
 
   return (
     <li className="card">
@@ -66,7 +66,7 @@ function Card({ data, onCardClick, onCardLike, onCardDelete }) {
             aria-label="Like"
             onClick={() => onCardLike(data)}
           />
-          <p className="card__like-counter">{data.likes.length}</p>
+          <p className="card__like-counter">{data.likes?.length || "0"}</p>
         </div>
       </div>
     </li>
