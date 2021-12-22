@@ -78,6 +78,7 @@
 @import url(./blocks/popup/__close-button/_shrink/popup__close-button_shrink.css);
 @import url(./blocks/popup/__title/_margin/_short/popup__title_margin_short.css);
 @import url(./blocks/popup/__title/_centered/popup__title_centered.css);
+@import url(./blocks/popup/__close-button/_centered/popup__close-button_centered.css);
 @import url(./blocks/form/__save-button/_disabled/form__save-button_disabled.css);
 @import url(./blocks/form/__input-error/_visible/form__input-error_visible.css);
 @import url(./blocks/form/__input/_error/form__input_error.css);

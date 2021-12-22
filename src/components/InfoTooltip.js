@@ -26,7 +26,7 @@ function InfoTooltip({ hasSucceed, isOpen, onClose }) {
     >
       <div className="popup__container">
         <button
-          className="popup__close-button popup__close-button_shrink"
+          className="popup__close-button popup__close-button_shrink popup__close-button_centered"
           type="button"
           aria-label="close"
           onClick={onClose}
