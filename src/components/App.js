@@ -133,10 +133,7 @@ function App() {
   const handleCardClick = (card) => setSelectedCard(card);
   const handleCardLike = (card) => {
     const hasLike = card.likes.some((like) => like._id === currentUser._id);
-    const updateLikes = hasLike
-      ? api.removeLike.bind(api)
-      : api.addLike.bind(api);
-    updateLikes(card._id)
+    (() => (hasLike ? api.removeLike(card._id) : api.addLike(card._id)))()
       .then((updatedCard) => {
         const index = cards.findIndex(({ _id: id }) => id === updatedCard._id);
         setCards([
