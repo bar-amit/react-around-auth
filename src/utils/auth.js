@@ -1,4 +1,4 @@
-const { authBaseUrl = "http://localhost:3001" } = process.env;
+const { authBaseUrl = "http://localhost:3000" } = process.env;
 
 function handleResponse(res) {
   if (res.ok) return res.json();
