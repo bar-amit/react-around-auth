@@ -1,4 +1,5 @@
-const { authBaseUrl = "http://localhost:3000" } = process.env;
+const { authBaseUrl = "https://api.bar-around.students.nomoreparties.sbs" } =
+  process.env;
 
 function handleResponse(res) {
   if (res.ok) return res.json();

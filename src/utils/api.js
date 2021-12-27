@@ -161,7 +161,7 @@ class Api {
 
 const getApi = (token) =>
   new Api({
-    host: "http://localhost:3000",
+    host: "https://api.bar-around.students.nomoreparties.sbs",
     authorization: `Bearer ${token}`,
   });
 

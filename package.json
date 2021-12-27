@@ -1,6 +1,6 @@
 {
   "name": "around-react",
-  "homepage": "https://bar-amit.github.io/react-around-auth",
+  "homepage": "https://bar-around.students.nomoreparties.sbs/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* bosh44@34.125.150.249:~/react-around-api-full/react-around-auth",
+    "deploy": "npm run build && scp -r ./build/* bosh44@34.125.150.249:~/react-around-api-full/frontend",
     "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
   "browserslist": {
