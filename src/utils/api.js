@@ -140,7 +140,7 @@ class Api {
    * @returns {Promise<cardData>} - Card data.
    */
   addLike(id) {
-    return fetch(`${this._host}/cards/likes/${id}`, {
+    return fetch(`${this._host}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._handleResponse);
@@ -152,7 +152,7 @@ class Api {
    * @returns {Promise<cardData>} - Card data.
    */
   removeLike(id) {
-    return fetch(`${this._host}/cards/likes/${id}`, {
+    return fetch(`${this._host}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._handleResponse);
