@@ -52,7 +52,7 @@ function UserForm({ handleFormSubmit, formTitle, formName, linkText }) {
                 id="input_password"
                 className="user-form__input"
                 value={password}
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Password"
                 minLength="2"
