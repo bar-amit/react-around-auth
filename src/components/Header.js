@@ -27,7 +27,7 @@ function Header({ onLogout, toggleMenu }) {
   });
 
   useEffect(() => {
-    if(email === null) setIsMenuOpen(false);
+    if (email === null) setIsMenuOpen(false);
   }, [email]);
 
   if (windowWidth <= 467)
