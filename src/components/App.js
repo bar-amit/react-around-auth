@@ -222,6 +222,7 @@ function App() {
   }
 
   function logout() {
+    setIsMobileMenuOpen(false);
     removeToken();
     setCurrentUser({ ...currentUser, signedIn: false, email: null });
   }

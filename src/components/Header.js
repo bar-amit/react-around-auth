@@ -26,6 +26,10 @@ function Header({ onLogout, toggleMenu }) {
     return () => window.removeEventListener("resize", updateWindowWidth);
   });
 
+  useEffect(() => {
+    if(email === null) setIsMenuOpen(false);
+  }, [email]);
+
   if (windowWidth <= 467)
     return (
       <header className="header">
