@@ -1,0 +1,9 @@
+.mobile-menu {
+    width: 100%;
+    padding: 40px 0;
+    transform: scaleY(0);
+    transition: transform .5s ease-out;
+    visibility: hidden;
+    position: fixed;
+    border-bottom: solid 1px rgba(84, 84, 84, 0.7);
+}

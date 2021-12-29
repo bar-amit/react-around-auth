@@ -12,6 +12,7 @@ import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip";
+import MobileMenu from "./MobileMenu";
 
 import { auth } from "../utils/auth";
 import getApi from "../utils/api";
@@ -30,6 +31,16 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const navigate = useNavigate();
+
+  /*
+    Mobile-menu state
+  */
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  function toggleMobileMenu() {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  }
 
   /*
     Popups state
@@ -238,7 +249,8 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header onLogout={logout} />
+        <MobileMenu isOpen={isMobileMenuOpen} onLogout={logout} />
+        <Header onLogout={logout} toggleMenu={toggleMobileMenu} />
         <Routes>
           <Route path="/login" element={<Login handleLogin={login} />} />
           <Route

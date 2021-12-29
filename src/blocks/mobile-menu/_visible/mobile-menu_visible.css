@@ -1,0 +1,5 @@
+.mobile-menu_visible {
+    transform: scaleY(1);
+    visibility: visible;
+    position: relative;
+}
